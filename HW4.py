@@ -124,9 +124,8 @@ def my2a():
         conf = int(conf)
         H = G.subgraph(invconf[conf])
         plotGraph(H)
-    except e:
-#print("Input is not valid")
-        print(e)
+    except:
+        print("Input is not valid")
 
 
 # In[430]:
@@ -330,9 +329,8 @@ def my3b():
             print(calcGrNr(myAuths,G))
         else:
             print("Number of Authors are bigger than 21")
-    except e:
-#print("Input is not valid")
-            print(e)
+    except:
+        print("Input is not valid")
     
     
     
@@ -357,7 +355,7 @@ while ex != "q":
     elif ex == "q":
         print("Nice to see you")
     else:
-        print("Choose the correct")
+        print("Invalid input")
 
 
 
