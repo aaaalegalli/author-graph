@@ -151,7 +151,7 @@ def my2a():
     try:
         conf = int(conf)
         H = G.subgraph(invconf[conf])
-        plotGraph(H)
+        plotGraph(H, 'random')
     except:
         print("Input is not valid")
 
@@ -211,7 +211,7 @@ def my2b():
         d = int(d)
         subauths = hopDist(auth, d)
         H = G.subgraph(subauths)
-        plotGraph(H)
+        plotGraph(H, 'round')
     except:
         print("Input is not valid")
 
