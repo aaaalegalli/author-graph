@@ -109,10 +109,36 @@ def invertedAuth(dataset):
 # In[454]:
 
 #function for plotting smaller graphs
-def plotGraph(Graph):
+def plotGraph(Graph, x):
+    d=nx.degree(H)
+    dict1={}
+    for i in d.values():
+    if 51<=i<=100:
+        dict1[i] = 'cyan'
+    if 21<=i<=50:
+        dict1[i] = 'yellow'
+    if 11<=i<=20:
+        dict1[i] = 'pink'
+    if i >= 10:
+        dict1[i] = 'black'
+    if 5<i<=9:
+        dict1[i] = 'green'
+    if 3<=i<=5:
+        dict1[i] = 'red'
+    if i == 2:
+        dict1[i] = 'purple'
+    if i == 1 or i == 0:
+        dict1[i] = 'orange'
+    
+    plt.figure(figsize=(20,10))
     plt.clf()
-    nx.draw(Graph,  with_labels=True, node_size=100, linewidths= 0.3, width=0.1)
-    #nx.draw_networkx_labels(H, pos=nx.spring_layout(H),labels=labels, font_size=16)
+    if x == "random":
+        nx.draw(H,  pos=nx.random_layout(H), node_list=d.keys(), node_size=[v*50 for v in d.values()], 
+            node_color= [dict1[i] for i in d.values()], linewidths= 0.3, width=0.1)
+    else:
+        nx.draw(H,  pos=nx.spring_layout(H), node_list=d.keys(), node_size=[v*50 for v in d.values()], 
+            node_color= [dict1[i] for i in d.values()], linewidths= 0.3, width=0.1)
+        
     plt.show()
 
 
