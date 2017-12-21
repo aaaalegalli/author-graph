@@ -28,7 +28,7 @@ It takes as input the file name (json file) as a string and return the dataset.
 - `invertedAuth(dataset, graph)`
 It takes as input the whole dataset and a graph and returns the inverted index with authors as keys and their publications as values. Furthermore it adds nodes to the graph, one for each authors.
 - `jacsim(aids, graph, invertedAuth)`
-It takes as input the author ids (list), a graph and the results of `invertedAuth` (dictionary) function, calculates jaccard similarity, sets the weight of each link between nodes that are connected and returns the graph.
+It takes as input the author ids (list), a graph and the results (dictionary) of `invertedAuth` function, calculates jaccard similarity, sets the weight of each link between nodes that are connected and returns the graph.
 
 Then, choose which exercise you want to run (2a, 2b, 3a or 3b).
 
