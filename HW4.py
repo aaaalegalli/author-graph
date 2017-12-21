@@ -7,6 +7,8 @@ import json
 import networkx as nx
 import matplotlib.pyplot as plt
 import heapq
+import warnings
+warnings.filterwarnings("ignore")
 
 
 # # Part 1
