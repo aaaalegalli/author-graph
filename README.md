@@ -40,11 +40,11 @@ The functions used are:
 - `invertedConf(dataset)`
 It takes as input the whole dataset and returns the inverted index with authors as keys and their publications as values.
 - `b_centrality(graph)`
-It calculates and returns the betweeness centrality (as a list) of the nodes of the graph given as input.
+It calculates betweeness centrality of the nodes of the graph given as input and plots an histogram of the index calculated.
 - `c_centrality(graph)`
-It calculates and returns the closeness centrality (as a list) of the nodes of the graph given as input.
+It calculates closeness centrality of the nodes of the graph given as input and plots an histogram of the index calculated.
 - `d_centrality(graph)`
-It calculates and returns the degree centrality (as a list) of the nodes of the graph given as input.
+It calculates degree centrality of the nodes of the graph given as input and plots an histogram of the index calculated.
 
 ### 2B
 #### You are asked to select an author id and an integer d, it returns and visualizes the subgraph induced by the nodes that have a number of edges at most equal to d as distance from the author selected (hop distance)
@@ -52,7 +52,9 @@ It calculates and returns the degree centrality (as a list) of the nodes of the 
 The functions used are:
 
 - `hopDist(aid, d)`
+It takes as input the id of one author and an integer d and returns a list of the subset of author ids which have hop distance at most equal to d.
 - `plotGraph(graph, shape)`
+It takes as input the entire graph and the shape of the plot (as a string, random or round) you want as result. It plots the subgraph of the `hopDist` results.
 
 ### 3A
 #### You are asked to choose an author, it returns the weight of shortest path from the author in input to Aris
@@ -60,6 +62,7 @@ The functions used are:
 The functions used are:
 
 - `mydistance(graph, start, end)`
+It calculates the shortest path (and returns the weight of it) between two authors (start and end as ids) inside the graph according to the Djikstra algorithm. In this case end is equal to the Aris id.
 
 ### 3B
 #### You are asked to choose a subset of authors id (at most 21), it returns for each node of the graph its GroupNumber (generalized version of Erdös number)
@@ -67,3 +70,4 @@ The functions used are:
 The functions used are:
 
 - `calcGrNr(aids, graph)`
+Given a graph and a subset of nodes (list of author ids), returns the GroupNumber of each node in the graph. It is the minimum shortest path between the node itself and the subset's nodes.
