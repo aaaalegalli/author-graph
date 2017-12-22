@@ -27,6 +27,8 @@ The functions used are:
 It takes as input the file name (json file) as a string and return the dataset.
 - `invertedAuth(dataset, graph)`
 It takes as input the whole dataset and a graph and returns the inverted index with authors as keys and their publications as values. Furthermore it adds nodes to the graph, one for each authors.
+- `invertedPub(dataset)`
+It takes as input the whole dataset and returns the inverted index with publication id as keys and the authors as values.
 - `jacsim(aids, graph, invertedAuth)`
 It takes as input the author ids (list), a graph and the results (dictionary) of `invertedAuth` function, calculates jaccard similarity, sets the weight of each link between nodes that are connected and returns the graph.
 
@@ -38,7 +40,7 @@ Then, choose which exercise you want to run (2a, 2b, 3a or 3b).
 The functions used are:
 
 - `invertedConf(dataset)`
-It takes as input the whole dataset and returns the inverted index with authors as keys and their publications as values.
+It takes as input the whole dataset and returns the inverted index with conference id as keys and the authors as values.
 - `b_centrality(graph)`
 It calculates betweeness centrality of the nodes of the graph given as input and plots an histogram of the index calculated.
 - `c_centrality(graph)`
