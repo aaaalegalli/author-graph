@@ -86,6 +86,7 @@ def my3b():
     except:
         print("Input is not valid")
 
+
 #read file
 dataq = input("Please enter 'r' for reduced dataset or 'f' for full dataset: ")
 try:
@@ -100,14 +101,13 @@ try:
         dataset = rf.readFile('reduced_dblp.json')
     # create graph
     G = nx.Graph()
-    # function for inverted index
-    print("Creating inverted Dict...")
+    # functions for inverted index
+    print("Creating Dataset...")
     inv = mf.invertedAuth(dataset, G)
-    # list with all authorIds
-    aids = list(inv.keys())
+    invpub = mf.invertedPub(dataset)
     # function for connecting nodes
     print("Calculating Similarities...")
-    G = mf.jacsim(aids, G, inv)
+    mf.jacsim(G, inv, invpub)
     ex = 0
     while ex != "q":
         ex = input("Please enter the number of the exercise you want to run (2a, 2b, 3a or 3b) or 'q' for quit: ")
