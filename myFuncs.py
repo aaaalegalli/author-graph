@@ -20,22 +20,39 @@ def invertedAuth(dataset, G):
                 inv[aid] = [i['id_publication_int']]
     return inv
 
+# create inverted index with confId as key and authorIds as values
+def invertedPub(dataset):
+    invpub = {}
+    for i in dataset:
+        lst = []
+        pid = i["id_publication_int"]
+        for author in i["authors"]:
+            lst.append(author['author_id'])
+        if (pid in invpub.keys()):
+            invpub[pid] += lst
+        else:
+            invpub[pid] = lst
+    return invpub
 
-# In[424]:
 
-# connect all nodes with the weight calculated by Jaccard similarity
-def jacsim(aids, G, inv):
-    for i in range(len(aids) - 1):
-        x = aids[i]
-        for j in range(i + 1, len(aids)):
-            y = aids[j]
-            inter = set(inv[x]).intersection(set(inv[y]))
-            if len(inter) > 0:
-                a = len(inter)
-                b = len(set(inv[x]).union(set(inv[y])))
-                w = 1 - a / b
-                G.add_edge(x, y, weight=w)
-    return G
+
+        # In[424]:
+
+ # connect all nodes with the weight calculated by Jaccard similarity
+def jacsim(G, inv, invpub):
+    pids = list(invpub.keys())
+    for n in pids:
+        aids = invpub[n]
+        for i in range(len(aids) - 1):
+            x = aids[i]
+            for j in range(i + 1, len(aids)):
+                y = aids[j]
+                inter = set(inv[x]).intersection(set(inv[y]))
+                if len(inter) > 0:
+                    a = len(inter)
+                    b = len(set(inv[x]).union(set(inv[y])))
+                    w = 1 - a / b
+                    G.add_edge(x, y, weight=w)
 
 
 # In[427]:
@@ -93,6 +110,7 @@ def mydistance(G, auth, end):
             aid = a[1]
             if aid == end:
                 result = "The Distance between " + str(auth) + " and " + str(end) + " is " + str(w)
+                break
             visited.add(aid)
             lst = G[aid]  # all connection
             for i in lst:
