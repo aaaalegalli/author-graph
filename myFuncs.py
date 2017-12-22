@@ -98,12 +98,15 @@ def hopDist(auth, d, G):
 # dijkstra function
 def mydistance(G, auth, end):
     if nx.has_path(G, auth, end):
+        dij = {}
         q = []
         visited = set()
         lst = G[auth]
         visited.add(auth)
         for i in lst:
             heapq.heappush(q, (lst[i]['weight'], i))
+            dij[i] = lst[i]['weight']
+        aid = -1
         while q:
             a = heapq.heappop(q)
             w = a[0]
@@ -115,16 +118,17 @@ def mydistance(G, auth, end):
             lst = G[aid]  # all connection
             for i in lst:
                 if i not in visited:
-                    isinside = False
-                    for j in q:
-                        if j[1] == i:
-                            isinside = True
-                            if j[0] > lst[i]['weight'] + w:
-                                q.remove(j)
-                                heapq.heappush(q, (lst[i]['weight'] + w, i))
-                            break
-                    if isinside == False:
+                    if i in dij.keys():
+                        if dij[i] > lst[i]['weight'] + w:
+                            for j in q:
+                                if j[1] == i:
+                                    q.remove(j)
+                                    heapq.heappush(q, (lst[i]['weight'] + w, i))
+                                    dij[i] = lst[i]['weight'] + w
+                                    break
+                    else:
                         heapq.heappush(q, (lst[i]['weight'] + w, i))
+                        dij[i] = lst[i]['weight'] + w
     else:
         result = "There is no path between " + str(auth) + " and " + str(end)
     return result
@@ -142,19 +146,20 @@ def calcGrNr(mlst, T):
             for end in mlst:
                 if nx.has_path(T, i, end):
                     q = []
+                    dij = {}
                     visited = set()
                     lst = T[i]
                     visited.add(i)
                     for j in lst:
                         heapq.heappush(q, (lst[j]['weight'], j))
-                    aid = 0
-                    while aid != end:
+                    while q:
                         a = heapq.heappop(q)
                         w = a[0]
                         aid = a[1]
                         if aid == end:
                             result = a
                             subdict[end] = w
+                            break
                         visited.add(aid)
                         if aid in dist.keys():
                             if end in dist[aid].keys():
@@ -163,17 +168,17 @@ def calcGrNr(mlst, T):
                             lst = T[aid]  # all connection
                             for x in lst:
                                 if x not in visited:
-                                    isinside = False
-                                    for y in q:
-                                        if y[1] == x:
-                                            isinside = True
-                                            if y[0] > lst[x]['weight'] + w:
-                                                q.remove(y)
-                                                heapq.heappush(q, (lst[x]['weight'] + w, x))
-                                            break
-                                    if isinside == False:
+                                    if x in dij.keys():
+                                        if dij[x] > lst[x]['weight'] + w:
+                                            for y in q:
+                                                if y[1] == x:
+                                                    q.remove(y)
+                                                    heapq.heappush(q, (lst[x]['weight'] + w, x))
+                                                    dij[x] = lst[x]['weight'] + w
+                                                    break
+                                    else:
                                         heapq.heappush(q, (lst[x]['weight'] + w, x))
-
+                                        dij[x] = lst[x]['weight'] + w
                     heapq.heappush(mydists, result[0])
             dist[i] = subdict
             if len(mydists) > 0:
