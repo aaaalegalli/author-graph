@@ -1,7 +1,7 @@
 
 # Group11
 
-## Homework4 ADM
+## HW - Algorithmic Methods of Data Mining
 
 In this project we carry out information from Computer Scientists network, using the DBLP dataset.
 Two datasets (json file) were provided:
